@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在学习js的过程中，我封装了一些js的兼容性写法及其一些小的插件作为一个小的库，方便后续需求的时候可以随时调用，后面也是会一直更新更多的写法">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己封装的一些兼容性写法及功能">
+<meta property="og:url" content="https://qq1338330975.github.io/2019/04/28/自己封装的一些兼容性写法及功能/index.html">
+<meta property="og:site_name" content="xupeisen">
+<meta property="og:description" content="在学习js的过程中，我封装了一些js的兼容性写法及其一些小的插件作为一个小的库，方便后续需求的时候可以随时调用，后面也是会一直更新更多的写法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-28T10:25:21.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自己封装的一些兼容性写法及功能">
+<meta name="twitter:description" content="在学习js的过程中，我封装了一些js的兼容性写法及其一些小的插件作为一个小的库，方便后续需求的时候可以随时调用，后面也是会一直更新更多的写法">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://qq1338330975.github.io/2019/04/28/自己封装的一些兼容性写法及功能/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>自己封装的一些兼容性写法及功能 | xupeisen</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xupeisen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qq1338330975.github.io/2019/04/28/自己封装的一些兼容性写法及功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xupeisen">
+      <meta itemprop="description" content="记录我遇到的一些问题还有一些我的一些总结，让我们一起进步，共同遨游在这篇数据的海洋中">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xupeisen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">自己封装的一些兼容性写法及功能
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-28 18:17:15 / 修改时间：18:25:21" itemprop="dateCreated datePublished" datetime="2019-04-28T18:17:15+08:00">2019-04-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web前端/" itemprop="url" rel="index"><span itemprop="name">web前端</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习js的过程中，我封装了一些js的兼容性写法及其一些小的插件作为一个小的库，方便后续需求的时候可以随时调用，后面也是会一直更新更多的写法<br><a id="more"></a></p>
+<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.unique = function () &#123;</span><br><span class="line">    var obj = &#123;&#125;,</span><br><span class="line">        arr = [];</span><br><span class="line">    for (var i = 0; i &lt; this.length; i++) &#123;</span><br><span class="line">        if (obj[this[i]] != this[i]) &#123;</span><br><span class="line">            obj[this[i]] = this[i];</span><br><span class="line">            arr.push(this[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var type = (function () &#123;</span><br><span class="line">    var template = &#123;</span><br><span class="line">        &quot;[object Array]&quot;: &quot;array&quot;,</span><br><span class="line">        &quot;[object Object]&quot;: &quot;object&quot;,</span><br><span class="line">        &quot;[object Number]&quot;: &quot;number - object&quot;,</span><br><span class="line">        &quot;[object Boolean]&quot;: &quot;boolean - object&quot;,</span><br><span class="line">        &quot;[object String]&quot;: &quot;string - object&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    return function (Target) &#123;</span><br><span class="line">        if (Target === null) &#123;</span><br><span class="line">            return &apos;null&apos;;</span><br><span class="line">        &#125; else if (typeof (Target) == &quot;object&quot;) &#123;</span><br><span class="line">            var str = Object.prototype.toString.call(Target);</span><br><span class="line">            return template[str];</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return typeof (Target);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="深度克隆"><a href="#深度克隆" class="headerlink" title="深度克隆"></a>深度克隆</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.coply = (function () &#123;</span><br><span class="line">    var Target = Target || [],</span><br><span class="line">        toStr = Object.prototype.toString,</span><br><span class="line">        arrStr = &apos;[objeck Array]&apos;;</span><br><span class="line">    return function (Origin) &#123;</span><br><span class="line">        for (var prop in Origin) &#123;</span><br><span class="line">            if (Origin.hasOwnProperty(prop)) &#123;</span><br><span class="line">                if (typeof (Origin[prop]) == &apos;objeck&apos;) &#123;</span><br><span class="line">                    if (toStr.call(Origin) == arrStr) &#123;</span><br><span class="line">                        this[prop] = [];</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        this[prop] = &#123;&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line">                    coply(Origin[prop], this[prop]);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    this[prop] = Origin[prop];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="圣杯模式"><a href="#圣杯模式" class="headerlink" title="圣杯模式"></a>圣杯模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var inherit = (function () &#123;</span><br><span class="line">    var F = function () &#123; &#125;;</span><br><span class="line">    return function (Target, Origin) &#123;</span><br><span class="line">        F.prototype = Origin.prototype;</span><br><span class="line">        Target.prototype = new F();</span><br><span class="line">        Target.prototype.constructor = Target;</span><br><span class="line">        Target.prototype.uber = Origin.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="返回当前时间"><a href="#返回当前时间" class="headerlink" title="返回当前时间"></a>返回当前时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var nowTime = (function () &#123;</span><br><span class="line">    var date = new Date;</span><br><span class="line">    var timeStr = &apos;&apos;;</span><br><span class="line">    var now = &#123;</span><br><span class="line">        0: date.getFullYear() + &apos;年&apos;,</span><br><span class="line">        1: date.getMonth() + &apos;月&apos;,</span><br><span class="line">        2: date.getDay() + &apos;日&apos;,</span><br><span class="line">        3: date.getHours() + &apos;时&apos;,</span><br><span class="line">        4: date.getMinutes() + &apos;分&apos;,</span><br><span class="line">        5: date.getSeconds() + &apos;秒&apos;,</span><br><span class="line">        length: 6,</span><br><span class="line">        push: Array.prototype.push,</span><br><span class="line">        splice: Array.prototype.splice</span><br><span class="line">    &#125;</span><br><span class="line">    return function () &#123;</span><br><span class="line">        timeStr = &apos;&apos;</span><br><span class="line">        for (var i = 0; i &lt; now.length; i++) &#123;</span><br><span class="line">            timeStr += now[i];</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(timeStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+<h4 id="计算滚动条距离"><a href="#计算滚动条距离" class="headerlink" title="计算滚动条距离"></a>计算滚动条距离</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var getScrolloffset = (function () &#123;</span><br><span class="line">    return function getScrolloffset() &#123;</span><br><span class="line">        if (window.pageXoffset) &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                X: window.pageXoffset,</span><br><span class="line">                y: window.pageYoffset</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                X: document.body.scrollLeft + document.documentElement.scrollLeft,</span><br><span class="line">                y: document.body.scrollTop + document.documentElement.scrollTop</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="计算可视窗口大小"><a href="#计算可视窗口大小" class="headerlink" title="计算可视窗口大小"></a>计算可视窗口大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var getViewport0ffset = (function () &#123;</span><br><span class="line">    return function () &#123;</span><br><span class="line">        if (window.innerWidth) &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                W: window.innerWidth,</span><br><span class="line">                h: window.innerHeight</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (document.compatMode === &quot;BackCompat&quot;) &#123;//判断当前模式是否处于怪异模式</span><br><span class="line">                return &#123;</span><br><span class="line">                    W: document.body.clientWidth,</span><br><span class="line">                    h: document.body.clientHeight</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    W: document.documentElement.clientWidth,</span><br><span class="line">                    h: document.documentElement.clientHeight</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="获取元素的css样式"><a href="#获取元素的css样式" class="headerlink" title="获取元素的css样式"></a>获取元素的css样式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function getStyle(elem, prop) &#123;</span><br><span class="line">    if (window.getComputedStyle) &#123;</span><br><span class="line">        return window.getComputedStyle(elem, null)[prop];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return elem.currentStyle[prop];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="绑定事件"><a href="#绑定事件" class="headerlink" title="绑定事件"></a>绑定事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var addEvent = (function()&#123;</span><br><span class="line">    return function(ele,type,handle)&#123;</span><br><span class="line">        if(ele.addEventListener)&#123;</span><br><span class="line">            ele.addEventListener(type,handle,false);</span><br><span class="line">            return &apos;Success&apos;;</span><br><span class="line">        &#125;else if(ele.attchEvent)&#123;</span><br><span class="line">            ele.attchEvent(&apos;on&apos; + type,function()&#123;</span><br><span class="line">                handle.call(ele);</span><br><span class="line">                return &apos;Success&apos;;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            ele[&apos;on&apos; + type] = handle;</span><br><span class="line">            return &apos;Success&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="取消冒泡"><a href="#取消冒泡" class="headerlink" title="取消冒泡"></a>取消冒泡</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var stopBubble = (function()&#123;</span><br><span class="line">    return function(event)&#123;</span><br><span class="line">        var e = event || window.event;</span><br><span class="line">        if(e.stopPropagation)&#123;</span><br><span class="line">            e.stopPropagation();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            e.cancelBubble = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="取消默认事件"><a href="#取消默认事件" class="headerlink" title="取消默认事件"></a>取消默认事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var cancelHandler = (function()&#123;</span><br><span class="line">    return function (event)&#123;</span><br><span class="line">        var e = event || window.event;</span><br><span class="line">        if(e.preventDefault)&#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            e.returnValue = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h4 id="事件源对象"><a href="#事件源对象" class="headerlink" title="事件源对象"></a>事件源对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var eventSource = (function()&#123;</span><br><span class="line">    return function(event)&#123;</span><br><span class="line">        var e = event || window.event;</span><br><span class="line">        var target = e.target || e.secElement;</span><br><span class="line">        //e.secElement IE独有</span><br><span class="line">        return target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/25/css常用选择器的优先级及其权重/" rel="next" title="css常用选择器的优先级及其权重">
+                <i class="fa fa-chevron-left"></i> css常用选择器的优先级及其权重
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="xupeisen">
+            
+              <p class="site-author-name" itemprop="name">xupeisen</p>
+              <div class="site-description motion-element" itemprop="description">记录我遇到的一些问题还有一些我的一些总结，让我们一起进步，共同遨游在这篇数据的海洋中</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/qq1338330975" title="GitHub &rarr; https://github.com/qq1338330975" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组去重"><span class="nav-number">1.</span> <span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型判断"><span class="nav-number">2.</span> <span class="nav-text">类型判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深度克隆"><span class="nav-number">3.</span> <span class="nav-text">深度克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#圣杯模式"><span class="nav-number">4.</span> <span class="nav-text">圣杯模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回当前时间"><span class="nav-number">5.</span> <span class="nav-text">返回当前时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算滚动条距离"><span class="nav-number">6.</span> <span class="nav-text">计算滚动条距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算可视窗口大小"><span class="nav-number">7.</span> <span class="nav-text">计算可视窗口大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取元素的css样式"><span class="nav-number">8.</span> <span class="nav-text">获取元素的css样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定事件"><span class="nav-number">9.</span> <span class="nav-text">绑定事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取消冒泡"><span class="nav-number">10.</span> <span class="nav-text">取消冒泡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取消默认事件"><span class="nav-number">11.</span> <span class="nav-text">取消默认事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件源对象"><span class="nav-number">12.</span> <span class="nav-text">事件源对象</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xupeisen</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
